@@ -45,7 +45,7 @@
                 <div id="account-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 {{ Request::is('admin/ingredients*') || Request::is('admin/products*') || Request::is('admin/ingredients-product*') ? '' : 'hidden' }}">
                     <ul class="pt-2 ps-2">
                         <li>
-                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 {{ Request::is('admin/ingredients*') ? 'text-blue-600' : 'text-neutral-700' }}" href="#">
+                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 {{ Request::is('admin/ingredients*') ? 'text-blue-600' : 'text-neutral-700' }}" href="{{ route('ingredients.index') }}">
                                 Ingredients
                             </a>
                         </li>
