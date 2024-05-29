@@ -50,7 +50,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 {{ Request::is('admin/products*') ? 'text-blue-600' : 'text-neutral-700' }}" href="#">
+                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 {{ Request::is('admin/products*') ? 'text-blue-600' : 'text-neutral-700' }}" href="{{ route('products.index') }}">
                                 Products
                             </a>
                         </li>

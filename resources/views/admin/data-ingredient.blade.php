@@ -82,9 +82,9 @@
                       <div class="ps-6 lg:ps-3 xl:ps-6 pe-6 py-3">
                         <div class="flex items-center gap-x-3">
                           @if ($ingredient->image)
-                            <img class="inline-block size-[38px] rounded-full" src="{{ asset('storage/' . $ingredient->image) }}" alt="Image Description">
+                            <img class="inline-block size-[38px]" src="{{ asset('storage/' . $ingredient->image) }}" alt="Image Description">
                           @else
-                            <img class="inline-block size-[38px] rounded-full" src="{{ asset('img/default-ingredients.jpg') }}" alt="Default Ingredient">
+                            <img class="inline-block size-[38px]" src="{{ asset('img/default-ingredients.jpg') }}" alt="Default Ingredient">
                           @endif
                         </div>
                       </div>
