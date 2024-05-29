@@ -1,82 +1,40 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
+            {{ __('Update Password') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __('Ensure your account is using a long, random password to stay secure.') }}
         </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    <form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
         @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
-        @csrf
-        @method('patch')
+        @method('put')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
+            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
+            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
-
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
+            <x-input-label for="update_password_password" :value="__('New Password')" />
+            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
         <div>
-            <x-input-label for="phone_number" :value="__('Phone Number')" />
-            <x-text-input id="phone_number" name="phone_number" type="text" class="mt-1 block w-full" :value="old('phone_number', $user->phone_number)" autocomplete="phone_number" />
-            <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
-        </div>
-
-        <div>
-            <x-input-label for="address" :value="__('Address')" />
-            <textarea id="address" name="address" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">{{ old('address', $user->address) }}</textarea>
-            <x-input-error class="mt-2" :messages="$errors->get('address')" />
-        </div>
-
-        <div>
-            <x-input-label for="photo" :value="__('Photo')" />
-            <div class="mt-2 mb-4">
-                @if ($user->photo)
-                    <img id="current-photo" src="{{ asset('storage/' . $user->photo) }}" alt="User Photo" class="w-32 h-32 mb-4">
-                @else
-                    <img id="current-photo" src="{{ asset('img/default-user.jpg') }}" alt="User Photo" class="w-32 h-32 mb-4">
-                @endif
-                {{-- <img id="new-photo-preview" src="#" alt="New Photo Preview" class="w-32 h-32 rounded-full mb-4" style="display: none;"> --}}
-            </div>
-            <x-text-input id="photo" name="photo" type="file" class="mt-1 block w-full" onchange="previewPhoto(event)" />
-            <x-input-error class="mt-2" :messages="$errors->get('photo')" />
+            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
+            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+            <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
-            @if (session('status') === 'profile-updated')
+            @if (session('status') === 'password-updated')
                 <p
                     x-data="{ show: true }"
                     x-show="show"
@@ -88,18 +46,3 @@
         </div>
     </form>
 </section>
-<script>
-    function previewPhoto(event) {
-        var reader = new FileReader();
-        reader.onload = function(){
-            var currentPhoto = document.getElementById('current-photo');
-            var newPhotoPreview = document.getElementById('new-photo-preview');
-            if (currentPhoto) {
-                currentPhoto.src = reader.result; // Update the current photo with the new one
-            }
-            newPhotoPreview.src = reader.result;
-            newPhotoPreview.style.display = 'block';
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-</script>
