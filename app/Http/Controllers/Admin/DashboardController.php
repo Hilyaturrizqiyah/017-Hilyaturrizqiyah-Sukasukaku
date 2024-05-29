@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        $totalCustomers = User::where('role', 'user')->count();
+        $totalCustomers = User::where('role', 'customer')->count();
         
         return view('admin.dashboard', compact('user', 'totalCustomers'));
     }

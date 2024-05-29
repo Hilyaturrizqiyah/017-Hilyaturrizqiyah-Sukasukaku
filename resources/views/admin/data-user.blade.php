@@ -189,7 +189,7 @@
                         <label for="role" class="block text-sm text-gray-600">Role</label>
                         <select id="role" name="role" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Select Role">
                             <option value="admin">Admin</option>
-                            <option value="user">User</option>
+                            <option value="customer">Customer</option>
                         </select>
                     </div>
                     <div class="mb-4">
@@ -219,42 +219,50 @@
                   <h2 class="text-xl font-semibold text-gray-800">Edit User</h2>
               </div>
               <div class="p-4">
-                  <form id="editUserForm" method="POST" action="" enctype="multipart/form-data">
-                      @csrf
-                      @method('PUT')
-                      <input type="hidden" id="editUserId" name="user_id">
-                      <div class="mb-4">
-                          <label for="editName" class="block text-sm text-gray-600">Name</label>
-                          <input type="text" id="editName" name="name" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                      </div>
-                      <div class="mb-4">
-                          <label for="editEmail" class="block text-sm text-gray-600">Email</label>
-                          <input type="email" id="editEmail" name="email" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                      </div>
-                      <div class="mb-4">
-                          <label for="editPhoneNumber" class="block text-sm text-gray-600">Phone Number</label>
-                          <input type="text" id="editPhoneNumber" name="phone_number" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                      </div>
-                      <div class="mb-4">
-                          <label for="editRole" class="block text-sm text-gray-600">Role</label>
-                          <select id="editRole" name="role" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                              <option value="admin">Admin</option>
-                              <option value="user">User</option>
-                          </select>
-                      </div>
-                      <div class="mb-4">
-                          <label for="editAddress" class="block text-sm text-gray-600">Address</label>
-                          <textarea id="editAddress" name="address" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" rows="4"></textarea>
-                      </div>
-                      <div class="mb-4">
-                          <label for="editPhoto" class="block text-sm text-gray-600">Photo</label>
-                          <input type="file" id="editPhoto" name="photo" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                      </div>
-                      <div class="flex justify-end">
-                          <button type="button" class="px-4 py-2 mr-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600" onclick="closeEditUserModal()">Cancel</button>
-                          <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Save</button>
-                      </div>
-                  </form>
+                <form id="addUserForm" method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
+                  @csrf
+                  <!-- Form Fields -->
+                  <div class="mb-4">
+                      <label for="name" class="block text-sm text-gray-600">Name</label>
+                      <input type="text" id="name" name="name" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Name">
+                  </div>
+                  <div class="mb-4">
+                      <label for="phone_number" class="block text-sm text-gray-600">Phone Number</label>
+                      <input type="text" id="phone_number" name="phone_number" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Phone Number">
+                  </div>
+                  <div class="mb-4">
+                      <label for="email" class="block text-sm text-gray-600">Email</label>
+                      <input type="email" id="email" name="email" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Email">
+                  </div>
+                  <div class="mb-4">
+                      <label for="password" class="block text-sm text-gray-600">Password</label>
+                      <input type="password" id="password" name="password" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Password">
+                  </div>
+                  <div class="mb-4">
+                      <label for="password_confirmation" class="block text-sm text-gray-600">Confirm Password</label>
+                      <input type="password" id="password_confirmation" name="password_confirmation" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Confirm Password">
+                  </div>
+                  <div class="mb-4">
+                      <label for="role" class="block text-sm text-gray-600">Role</label>
+                      <select id="role" name="role" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                          <option value="admin">Admin</option>
+                          <option value="customer">Customer</option>
+                      </select>
+                  </div>
+                  <div class="mb-4">
+                      <label for="address" class="block text-sm text-gray-600">Address</label>
+                      <textarea id="address" name="address" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" rows="4" placeholder="Your Address"></textarea>
+                  </div>                  
+                  <div class="mb-4">
+                      <label for="photo" class="block text-sm text-gray-600">Photo</label>
+                      <input type="file" id="photo" name="photo" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                  </div>
+                  <div class="flex justify-end">
+                      <button type="button" class="px-4 py-2 mr-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600" onclick="closeAddUserModal()">Cancel</button>
+                      <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Save</button>
+                  </div>
+              </form>
+              
               </div>
           </div>
       </div>
