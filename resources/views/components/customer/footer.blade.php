@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
             <div>
               <a href="/">
-                <img src="img/sukasukaku2.png" alt="SukaSukaKu Logo" class="h-17">
+                <img src="{{ asset('img/sukasukaku2.png') }}" alt="SukaSukaKu Logo" class="h-17">
               </a>
             </div>
             <div>
@@ -27,7 +27,7 @@
               <p class="text-base font-semibold">Copyright &copy;<script>document.write(new Date().getFullYear());</script> Sukasukaku</p>
             </div>
             <div class="mt-4 md:mt-0">
-                <img src="img/payment-item.png" alt="Payment Methods" class="mx-auto md:mx-0">
+                <img src="{{ asset('img/payment-item.png') }}" alt="Payment Methods" class="mx-auto md:mx-0">
             </div>
         </div>
     </div>

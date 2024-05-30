@@ -15,7 +15,7 @@
             <!-- Brand Name -->
             {{-- <div class="text-xl font-semibold text-blue-600">SukaSukaKu</div> --}}
             <a href="/">
-                <img src="img/sukasukaku2.png" alt="SukaSukaKu Logo" class="h-13">
+                <img src="{{ asset('img/sukasukaku2.png') }}" alt="SukaSukaKu Logo" class="h-13">
             </a>
 
             <!-- Search Input -->
@@ -56,9 +56,16 @@
                 </form> --}}
                 <div class="relative inline-block text-left">
                   <div class="hs-dropdown [--placement:bottom-right] relative inline-flex">
-                      <button type="button" class="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none border-gray-300 shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-gray-100 focus:ring-indigo-500" id="profile-menu-button" aria-haspopup="true" aria-expanded="false">
-                          <img class="h-9 w-9 rounded-full" src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="User profile picture">
-                      </button>
+                    <button type="button" class="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none border-gray-300 shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-gray-100 focus:ring-indigo-500" id="profile-menu-button" aria-haspopup="true" aria-expanded="false">
+                        @auth
+                            @if (auth()->user()->image)
+                                <img class="h-9 w-9 rounded-full" src="{{ asset('storage/' . auth()->user()->image) }}" alt="User profile picture">
+                            @else
+                                <img class="h-9 w-9 rounded-full" src="{{ asset('img/default-user.jpg') }}" alt="Default profile picture">
+                            @endif
+                        @endauth
+                    </button>
+                    
                   </div>
                   <div id="profile-menu" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden" role="menu" aria-orientation="vertical" aria-labelledby="profile-menu-button">
                     <div class="py-3 px-5 bg-gray-200 rounded-t-lg dark:bg-neutral-800">
@@ -66,7 +73,7 @@
                         <p class="text-sm font-medium text-gray-800 dark:text-neutral-300">{{ Auth::user()->name }}</p>
                     </div>
                     <div class="py-1" role="none">
-                          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Your Profile</a>
+                          <a href="{{ route('customer.profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Your Profile</a>
                           <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Settings</a>
                           <form method="POST" action="{{ route('logout') }}">
                               @csrf

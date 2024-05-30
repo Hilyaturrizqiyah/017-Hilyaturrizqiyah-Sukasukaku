@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::middleware(['auth', 'role:customer'])->group(function () {
+    Route::prefix('/customer')->group(function () {
+        Route::get('/profile', [HomeController::class, 'edit'])->name('customer.profile.edit');
+        Route::patch('/profile', [HomeController::class, 'update'])->name('customer.profile.update');
+        Route::delete('/profile', [HomeController::class, 'destroy'])->name('customer.profile.destroy');
+    });
+});
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::prefix('/admin')->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
