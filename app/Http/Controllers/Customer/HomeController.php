@@ -10,12 +10,15 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
     public function index(){
         $user = Auth::user();
-        return view('customer.home', compact('user'));
+        $products = Product::with('ingredients')->get();
+
+        return view('customer.home', compact('user', 'products'));
     }
 
     // Profile

@@ -15,4 +15,9 @@ class Ingredient extends Model
         'image',
         'ingredient_photo',
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_ingredient')->withPivot('quantity');
+    }
 }

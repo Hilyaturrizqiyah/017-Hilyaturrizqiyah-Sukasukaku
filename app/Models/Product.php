@@ -12,5 +12,12 @@ class Product extends Model
     protected $fillable = [
         'name', 
         'serve_price', 
-        'image'];
+        'image'
+    ];
+
+
+    public function ingredients()
+    {
+        return $this->belongsToMany(Ingredient::class, 'product_ingredient')->withPivot('quantity');
+    }
 }

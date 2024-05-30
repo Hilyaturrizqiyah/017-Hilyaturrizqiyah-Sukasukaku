@@ -45,15 +45,6 @@
                 <!-- Separator -->
                 <div class="border-r border-blue-300 h-6"></div>
                 @if (Auth::check())
-                {{-- <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                    Logout
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form> --}}
                 <div class="relative inline-block text-left">
                   <div class="hs-dropdown [--placement:bottom-right] relative inline-flex">
                     <button type="button" class="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none border-gray-300 shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-gray-100 focus:ring-indigo-500" id="profile-menu-button" aria-haspopup="true" aria-expanded="false">

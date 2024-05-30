@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Customer\ProductShowController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\IngredientController;
@@ -15,6 +16,8 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
         Route::get('/profile', [HomeController::class, 'edit'])->name('customer.profile.edit');
         Route::patch('/profile', [HomeController::class, 'update'])->name('customer.profile.update');
         Route::delete('/profile', [HomeController::class, 'destroy'])->name('customer.profile.destroy');
+
+        Route::get('/products/{id}', [ProductShowController::class, 'show'])->name('product.show');
     });
 });
 
