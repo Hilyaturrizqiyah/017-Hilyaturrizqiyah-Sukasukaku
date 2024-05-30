@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\ProductShowController;
+use App\Http\Controllers\Customer\CartController;
+use App\Http\Controllers\Customer\CheckoutController;
+
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\IngredientController;
@@ -18,6 +21,14 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
         Route::delete('/profile', [HomeController::class, 'destroy'])->name('customer.profile.destroy');
 
         Route::get('/products/{id}', [ProductShowController::class, 'show'])->name('product.show');
+        
+        Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+        Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+        Route::post('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+        Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+        Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
     });
 });
 

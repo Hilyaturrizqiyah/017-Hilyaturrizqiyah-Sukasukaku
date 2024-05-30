@@ -106,7 +106,7 @@
                             <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('img/default-ingredients.jpg') }}" alt="{{ $product->name }}" class="w-full h-50 object-cover">
                             <ul class="absolute inset-0 flex justify-center items-center space-x-2 opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50">
                                 <li><a href="#" class="text-white"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#" class="text-white"><i class="fa fa-shopping-cart"></i></a></li>
+                                <li><a href="{{ route('cart.add', ['productId' => $product->id]) }}" class="text-white"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="p-2">
