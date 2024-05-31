@@ -59,7 +59,7 @@ class TransactionController extends Controller
     {
         // Validasi data yang diterima
         $request->validate([
-            'status' => 'required|string',
+            'status' => 'required|string|in:pending,process,delivery,done',
         ]);
 
         // Perbarui status transaksi

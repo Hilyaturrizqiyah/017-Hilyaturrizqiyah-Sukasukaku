@@ -22,12 +22,6 @@
                                     <div class="flex items-center ml-4">
                                         <input type="text" id="search" class="w-full ml-2 px-7 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Search..." onkeyup="filter()">
                                     </div>
-                                    {{-- <a href="{{ route('transactions.create') }}" class="inline-flex items-center px-2 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none ml-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="padding-right: 8px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-                                        </svg>
-                                        Add
-                                    </a> --}}
                                 </div>
                             </div>
                         </div>
@@ -180,7 +174,7 @@
     
 
     <script>
-       function openEditTransactionModal(transactionId, currentStatus) {
+        function openEditTransactionModal(transactionId, currentStatus) {
             const form = document.getElementById('editTransactionForm');
             const action = "{{ route('transactions.update', ['transaction' => 'PLACEHOLDER']) }}".replace('PLACEHOLDER', transactionId);
             form.action = action;
@@ -192,6 +186,7 @@
         function closeEditTransactionModal() {
             document.getElementById('editTransactionModal').classList.add('hidden');
         }
+
     
         document.getElementById('editTransactionForm').addEventListener('submit', function(e) {
             e.preventDefault();

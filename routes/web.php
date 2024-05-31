@@ -49,8 +49,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::resource('transactions', TransactionController::class);
         Route::resource('product-ingredients', ProductIngredientController::class);
 
-        Route::put('/transactions/{transaction}', [TransactionController::class, 'update'])->name('transactions.update');
-
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
