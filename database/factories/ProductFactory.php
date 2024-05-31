@@ -20,6 +20,7 @@ class ProductFactory extends Factory
             'name' => $this->faker->word,
             'serve_price' => $this->faker->numberBetween(1000, 50000),
             'image' => $this->faker->imageUrl(640, 480, 'food', true),
+            'qty_product' => $this->faker->numberBetween(1, 100),
         ];
     }
 }

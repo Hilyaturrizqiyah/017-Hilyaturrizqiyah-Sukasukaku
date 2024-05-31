@@ -5,6 +5,7 @@ use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\ProductShowController;
 use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\CheckoutController;
+use App\Http\Controllers\Customer\OrderController;
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
@@ -28,6 +29,9 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
 
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
         Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders/{id}/details', [OrderController::class, 'show'])->name('orders.details');
 
     });
 });

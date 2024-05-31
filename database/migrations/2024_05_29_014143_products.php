@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 255);
             $table->integer('serve_price');
             $table->string('image')->nullable();
+            $table->integer('qty_product');
             $table->timestamps();
         });
     }
