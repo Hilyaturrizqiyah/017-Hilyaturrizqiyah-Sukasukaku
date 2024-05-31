@@ -38,7 +38,7 @@ class HomeController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
-
+    
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
@@ -64,8 +64,10 @@ class HomeController extends Controller
     
         $user->save();
     
-        return redirect()->route('customer.profile.edit')->with('status', 'profile-updated');
+        // Redirect ke halaman customer
+        return redirect()->route('customer.profile.edit')->with('status', 'Profile updated successfully');
     }
+    
 
     /**
      * Delete the user's account.

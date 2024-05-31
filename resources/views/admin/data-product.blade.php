@@ -62,6 +62,14 @@
                                         </div>
                                     </th>
 
+                                    <th scope="col" class="px-6 py-3 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 ">
+                                                Quantity
+                                            </span>
+                                        </div>
+                                    </th>
+
                                     <th scope="col" class="px-6 py-3 text-end"></th>
                                 </tr>
                             </thead>
@@ -91,10 +99,12 @@
                                         </div>
                                     </td>
                                     <td class="size-px whitespace-nowrap">
+                                        <div class="px-6 py-3">
+                                            <span class="block text-sm text-gray-800 ">{{ $product->qty_product }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="size-px whitespace-nowrap">
                                         <div class="px-6 py-1.5">
-                                            <button class="text-blue-600 hover:text-blue-900 mr-2" onclick="openDetailModal('{{ $product->name }}', '{{ $product->serve_price }}', '{{ asset('storage/' . $product->image) }}')">
-                                                <i class="fas fa-info-circle"></i>
-                                            </button>
                                             <button class="text-blue-600 hover:text-blue-900 mr-2" onclick="openEditModal({{ $product->id }})">
                                                 <i class="fas fa-edit"></i>
                                             </button>
@@ -161,6 +171,18 @@
                             <input type="number" id="serve_price" name="serve_price" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Serve Price">
                         </div>
                         <div class="mb-4">
+                            <label for="qty_product" class="block text-sm text-gray-600">Quantity</label>
+                            <input type="number" id="qty_product" name="qty_product" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Quantity">
+                        </div>
+                        <div class="mb-4">
+                            <label for="instruction" class="block text-sm text-gray-600">Instruction</label>
+                            <textarea id="instruction" name="instruction" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Instruction"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="description" class="block text-sm text-gray-600">Description</label>
+                            <textarea id="description" name="description" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Description"></textarea>
+                        </div>
+                        <div class="mb-4">
                             <label for="image" class="block text-sm text-gray-600">Image</label>
                             <input type="file" id="image" name="image" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
                         </div>
@@ -173,6 +195,7 @@
             </div>
         </div>
     </div>
+    
 
     <!-- Edit Modal -->
     <div id="editModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
@@ -195,6 +218,18 @@
                             <input type="number" id="editServePrice" name="serve_price" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <div class="mb-4">
+                            <label for="editQtyProduct" class="block text-sm text-gray-600">Quantity</label>
+                            <input type="number" id="editQtyProduct" name="qty_product" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Quantity">
+                        </div>
+                        <div class="mb-4">
+                            <label for="editInstruction" class="block text-sm text-gray-600">Instruction</label>
+                            <textarea id="editInstruction" name="instruction" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Instruction"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label for="editDescription" class="block text-sm text-gray-600">Description</label>
+                            <textarea id="editDescription" name="description" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Description"></textarea>
+                        </div>
+                        <div class="mb-4">
                             <label for="editImage" class="block text-sm text-gray-600">Image</label>
                             <input type="file" id="editImage" name="image" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
                         </div>
@@ -206,35 +241,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Detail Modal -->
-    <div id="detailModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
-        <div class="min-h-screen flex items-center justify-center">
-            <div class="bg-white rounded-lg shadow-xl w-full max-w-lg">
-                <div class="p-4 border-b">
-                    <h2 class="text-xl font-semibold text-gray-800">Product Details</h2>
-                </div>
-                <div class="p-4">
-                    <div class="mb-4">
-                        <label for="detailName" class="block text-sm text-gray-600">Name</label>
-                        <input type="text" id="detailName" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" readonly>
-                    </div>
-                    <div class="mb-4">
-                        <label for="detailServePrice" class="block text-sm text-gray-600">Serve Price</label>
-                        <input type="text" id="detailServePrice" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" readonly>
-                    </div>
-                    <div class="mb-4">
-                        <label for="detailImage" class="block text-sm text-gray-600">Image</label>
-                        <img id="detailImage" class="w-full mt-1 border rounded-lg" alt="Product Image">
-                    </div>
-                    <div class="flex justify-end">
-                        <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600" onclick="closeDetailModal()">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </div>    
 
 
     <!-- Scripts to handle modal open/close -->
@@ -249,39 +256,30 @@
         }
 
         function openEditModal(productId) {
-        fetch(`/admin/products/${productId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(product => {
-                document.getElementById('editProductId').value = product.id;
-                document.getElementById('editName').value = product.name;
-                document.getElementById('editServePrice').value = product.serve_price;
-                // Add other fields here as needed
-                document.getElementById('editForm').action = `/admin/products/${product.id}`;
-                document.getElementById('editModal').classList.remove('hidden');
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
+            fetch(`/admin/products/${productId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(product => {
+                    document.getElementById('editProductId').value = product.id;
+                    document.getElementById('editName').value = product.name;
+                    document.getElementById('editServePrice').value = product.serve_price;
+                    document.getElementById('editQtyProduct').value = product.qty_product;
+                    document.getElementById('editInstruction').value = product.instruction || ''; // memastikan data instruction diisi
+                    document.getElementById('editDescription').value = product.description || ''; // memastikan data description diisi
+                    document.getElementById('editForm').action = `/admin/products/${product.id}`;
+                    document.getElementById('editModal').classList.remove('hidden');
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
         }
 
         function closeEditModal() {
             document.getElementById('editModal').classList.add('hidden');
-        }
-        
-        function openDetailModal(name, servePrice, image) {
-            document.getElementById('detailName').value = name;
-            document.getElementById('detailServePrice').value = servePrice;
-            document.getElementById('detailImage').src = image;
-            document.getElementById('detailModal').classList.remove('hidden');
-        }
-
-        function closeDetailModal() {
-            document.getElementById('detailModal').classList.add('hidden');
         }
     </script>
 </x-admin.app>

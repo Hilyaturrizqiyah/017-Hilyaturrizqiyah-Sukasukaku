@@ -1,6 +1,6 @@
 <x-customer.app>
     <div class="bg-white">
-        <div class="pt-6">
+        <div class="pt-6 mx-auto mb-16">
             <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:max-w-7xl lg:px-8">
                 <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Order Details</h1>
                 <div class="mt-6">

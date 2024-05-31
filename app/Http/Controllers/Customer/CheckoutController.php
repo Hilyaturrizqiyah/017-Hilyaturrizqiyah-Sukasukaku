@@ -40,15 +40,14 @@ class CheckoutController extends Controller
     {
         // Validate request data
         $request->validate([
-            'name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'postal_code' => 'required|string|max:10',
         ]);
 
         // Get cart items from session
         $cart = $request->session()->get('cart', []);
         $totalPrice = 0;
+        $user = Auth::user();
+        $user->address = $request->address;
 
         foreach ($cart as $productId => $item) {
             $product = Product::findOrFail($productId);

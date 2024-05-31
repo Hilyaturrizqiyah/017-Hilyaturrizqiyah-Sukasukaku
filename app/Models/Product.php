@@ -14,6 +14,8 @@ class Product extends Model
         'serve_price', 
         'image',
         'qty_product',
+        'instruction',
+        'description',
     ];
 
 

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('serve_price');
             $table->string('image')->nullable();
             $table->integer('qty_product');
+            $table->text('instruction');
+            $table->text('description');
             $table->timestamps();
         });
     }

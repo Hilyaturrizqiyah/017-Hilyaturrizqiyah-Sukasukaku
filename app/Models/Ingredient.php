@@ -13,7 +13,6 @@ class Ingredient extends Model
         'ingredient_price',
         'unit',
         'image',
-        'ingredient_photo',
     ];
 
     public function products()

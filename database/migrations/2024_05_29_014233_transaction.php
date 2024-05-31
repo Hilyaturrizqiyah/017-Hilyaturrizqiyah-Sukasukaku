@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->timestamp('transaction_date')->useCurrent();
             $table->integer('customer_id')->unsigned();
+            $table->enum('option', ['uncooked', 'cooked']);
             $table->integer('total_price');
             $table->string('status', 10);
             $table->timestamps();

@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\IngredientController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\ProductIngredientController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -26,6 +27,7 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
         
         Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
         Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+        Route::put('/cart/{productId}', [CartController::class, 'update'])->name('cart.update');
         Route::post('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
         Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
@@ -45,6 +47,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::resource('ingredients', IngredientController::class);
         Route::resource('products', ProductController::class);
         Route::resource('transactions', TransactionController::class);
+        Route::resource('product-ingredients', ProductIngredientController::class);
+
+        Route::put('/transactions/{transaction}', [TransactionController::class, 'update'])->name('transactions.update');
 
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -24,6 +24,9 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'serve_price' => 'required|numeric',
+            'qty_product' => 'required|integer',
+            'instruction' => 'required|string',
+            'description' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -55,6 +58,9 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'serve_price' => 'required|numeric',
+            'qty_product' => 'required|integer',
+            'instruction' => 'required|string',
+            'description' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 

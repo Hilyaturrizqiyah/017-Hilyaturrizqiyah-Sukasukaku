@@ -55,7 +55,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 {{ Request::is('admin/ingredients-product*') ? 'text-blue-600' : 'text-neutral-700' }}" href="#">
+                            <a class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm rounded-lg hover:bg-gray-100 {{ Request::is('admin/product-ingredients*') ? 'text-blue-600' : 'text-neutral-700' }}" href="{{ route('product-ingredients.index') }}">
                                 Ingredients Product
                             </a>
                         </li>

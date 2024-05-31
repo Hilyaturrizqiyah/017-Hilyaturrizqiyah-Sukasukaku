@@ -22,12 +22,12 @@
                                     <div class="flex items-center ml-4">
                                         <input type="text" id="search" class="w-full ml-2 px-7 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Search..." onkeyup="filter()">
                                     </div>
-                                    <a href="{{ route('transactions.create') }}" class="inline-flex items-center px-2 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none ml-4">
+                                    {{-- <a href="{{ route('transactions.create') }}" class="inline-flex items-center px-2 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none ml-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="padding-right: 8px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                                         </svg>
                                         Add
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </div>
                         </div>
@@ -85,11 +85,7 @@
                                     </td>
                                     <td class="h-px w-72 whitespace-nowrap">
                                         <div class="px-6 py-3">
-                                            @if ($transaction->user)
-                                                <span class="block text-sm text-gray-800">{{ $transaction->user->name }}</span>
-                                            @else
-                                                <span class="block text-sm text-red-600">Unknown User</span>
-                                            @endif
+                                            <span class="block text-sm text-gray-800">{{ $transaction->user->name }}</span>
                                         </div>
                                     </td>
                                     <td class="size-px whitespace-nowrap">
@@ -104,9 +100,6 @@
                                     </td>
                                     <td class="size-px whitespace-nowrap">
                                         <div class="px-6 py-1.5">
-                                            <a href="{{ route('transactions.show', $transaction) }}" class="text-blue-600 hover:text-blue-900 mr-2">
-                                                <i class="fas fa-info-circle"></i>
-                                            </a>
                                             <button type="button" class="text-blue-600 hover:text-blue-900 mr-2" data-id="{{ $transaction->id }}" data-customer-id="{{ $transaction->customer_id }}" data-total-price="{{ $transaction->total_price }}" data-status="{{ $transaction->status }}" onclick="openEditTransactionModal(this)">
                                                 <i class="fas fa-edit"></i>
                                             </button>
@@ -168,18 +161,12 @@
                         <input type="hidden" id="editTransactionId" name="transaction_id">
                         <div class="mb-4">
                             <label for="editStatus" class="block text-sm text-gray-600">Status</label>
-                            <input type="text" id="editStatus" name="status" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div class="mb-4">
-                            <label class="block text-sm text-gray-600">Transaction Details</label>
-                            <ul>
-                                @foreach($transaction->details as $detail)
-                                <li>{{ $detail->product->name }} - {{ $detail->qty_product }}</li>
-                                @foreach($detail->product->ingredients as $ingredient)
-                                <li>- {{ $ingredient->ingredients_name }}</li>
-                                @endforeach
-                                @endforeach
-                            </ul>
+                            <select id="editStatus" name="status" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                                <option value="pending">Pending</option>
+                                <option value="process">Process</option>
+                                <option value="delivery">Delivery</option>
+                                <option value="done">Done</option>
+                            </select>
                         </div>
                         <div class="flex justify-end">
                             <button type="button" class="px-4 py-2 mr-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600" onclick="closeEditTransactionModal()">Cancel</button>
@@ -191,19 +178,17 @@
         </div>
     </div>
     
-    
 
     <script>
-        function openEditTransactionModal(button) {
-            const transactionId = button.getAttribute('data-id');
-            const status = button.getAttribute('data-status');
-    
+       function openEditTransactionModal(transactionId, currentStatus) {
+            const form = document.getElementById('editTransactionForm');
+            const action = "{{ route('transactions.update', ['transaction' => 'PLACEHOLDER']) }}".replace('PLACEHOLDER', transactionId);
+            form.action = action;
             document.getElementById('editTransactionId').value = transactionId;
-            document.getElementById('editStatus').value = status;
-    
+            document.getElementById('editStatus').value = currentStatus;
             document.getElementById('editTransactionModal').classList.remove('hidden');
         }
-    
+
         function closeEditTransactionModal() {
             document.getElementById('editTransactionModal').classList.add('hidden');
         }

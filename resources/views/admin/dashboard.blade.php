@@ -33,7 +33,7 @@
     
                 <div class="mt-1 flex items-center gap-x-2">
                 <h3 class="text-xl sm:text-2xl font-medium text-gray-800">
-                    29.4%
+                    {{ $totalProducts }}
                 </h3>
                 </div>
             </div>
@@ -51,7 +51,7 @@
     
                 <div class="mt-1 flex items-center gap-x-2">
                 <h3 class="text-xl sm:text-2xl font-medium text-gray-800">
-                    56.8%
+                    {{ $totalTransactions }}
                 </h3>
                 </div>
             </div>

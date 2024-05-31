@@ -63,14 +63,6 @@
                       </div>
                     </th>
 
-                    <th scope="col" class="px-6 py-3 text-start">
-                      <div class="flex items-center gap-x-2">
-                        <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 ">
-                          Price
-                        </span>
-                      </div>
-                    </th>
-
                     <th scope="col" class="px-6 py-3 text-end"></th>
                   </tr>
                 </thead>
@@ -97,13 +89,6 @@
                     <td class="size-px whitespace-nowrap">
                       <div class="px-6 py-3">
                         <span class="block text-sm text-gray-800 ">{{ $ingredient->unit }}</span>
-                      </div>
-                    </td>
-                    <td class="size-px whitespace-nowrap">
-                      <div class="px-6 py-3">
-                        <div class="flex items-center gap-x-3">
-                          <span class="block text-sm text-gray-800 ">{{ $ingredient->ingredient_price }}</span>
-                        </div>
                       </div>
                     </td>
                     <td class="size-px whitespace-nowrap">
@@ -170,10 +155,6 @@
                       <input type="text" id="ingredient_name" name="ingredient_name" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Name">
                   </div>
                   <div class="mb-4">
-                      <label for="ingredient_price" class="block text-sm text-gray-600">Price</label>
-                      <input type="number" id="ingredient_price" name="ingredient_price" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Price">
-                  </div>
-                  <div class="mb-4">
                       <label for="unit" class="block text-sm text-gray-600">Unit</label>
                       <input type="text" id="unit" name="unit" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="Unit">
                   </div>
@@ -207,10 +188,6 @@
                       <div class="mb-4">
                           <label for="editIngredientName" class="block text-sm text-gray-600">Name</label>
                           <input type="text" id="editIngredientName" name="ingredient_name" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                      </div>
-                      <div class="mb-4">
-                          <label for="editIngredientPrice" class="block text-sm text-gray-600">Price</label>
-                          <input type="text" id="editIngredientPrice" name="ingredient_price" class="w-full mt-1 px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500">
                       </div>
                       <div class="mb-4">
                             <label for="editUnit" class="block text-sm text-gray-600">Unit</label>
@@ -253,7 +230,6 @@
             .then(ingredient => {
                 document.getElementById('editIngredientId').value = ingredient.id;
                 document.getElementById('editIngredientName').value = ingredient.ingredient_name;
-                document.getElementById('editIngredientPrice').value = ingredient.ingredient_price;
                 document.getElementById('editUnit').value = ingredient.unit;
                 // Add other fields here as needed
                 document.getElementById('editForm').action = `/admin/ingredients/${ingredient.id}`;

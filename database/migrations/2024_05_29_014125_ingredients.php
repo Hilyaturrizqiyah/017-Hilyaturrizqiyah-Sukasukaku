@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('ingredients', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ingredient_name', 255);
-            $table->integer('ingredient_price');
             $table->string('unit', 255);
             $table->string('image')->nullable();
-            $table->binary('ingredient_photo')->nullable();
             $table->timestamps();
         });
     }

@@ -57,16 +57,17 @@ class TransactionController extends Controller
 
     public function update(Request $request, Transaction $transaction)
     {
+        // Validasi data yang diterima
         $request->validate([
-            'customer_id' => 'required|exists:users,id',
-            'total_price' => 'required|numeric',
-            'status' => 'required|string|max:10',
-            // Add other validation rules as needed
+            'status' => 'required|string',
         ]);
 
-        $transaction->update($request->only('customer_id', 'total_price', 'status'));
+        // Perbarui status transaksi
+        $transaction->status = $request->input('status');
+        $transaction->save();
 
-        return response()->json(['success' => true]);
+        // Redirect dengan pesan sukses
+        return redirect()->back()->with('success', 'Transaction updated successfully');
     }
 
 

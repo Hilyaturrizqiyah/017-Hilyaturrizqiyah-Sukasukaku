@@ -27,6 +27,7 @@ class CartController extends Controller
                 'serve_price' => $product->serve_price,
                 'quantity' => $item['quantity'],
                 'image' => $product->image,
+                'option' => $product->option,
                 // Add more product data if needed
             ];
 
@@ -50,12 +51,13 @@ class CartController extends Controller
             // Increment quantity if product is already in cart
             $cart[$productId]['quantity']++;
         } else {
-            // Add new product to cart
+            // Add new product to cart with default option
             $cart[$productId] = [
                 'name' => $product->name,
                 'serve_price' => $product->serve_price,
                 'quantity' => 1,
                 'image' => $product->image,
+                'option' => 'uncooked', // Default option
             ];
         }
 
@@ -63,6 +65,29 @@ class CartController extends Controller
 
         return redirect()->back()->with('success', 'Product added to cart successfully');
     }
+
+
+    public function update(Request $request, $productId)
+    {
+        // Ambil produk dari database berdasarkan ID
+        $product = Product::findOrFail($productId);
+
+        // Lakukan validasi data yang diterima dari form
+        $request->validate([
+            'quantity' => 'required|numeric|min:1', // Contoh validasi, sesuaikan dengan kebutuhan Anda
+        ]);
+
+        // Simpan data yang diperbarui ke dalam session cart
+        $cart = $request->session()->get('cart', []);
+        if (isset($cart[$productId])) {
+            $cart[$productId]['quantity'] = $request->input('quantity');
+            $request->session()->put('cart', $cart);
+            return redirect()->route('cart.index')->with('success', 'Cart updated successfully');
+        }
+
+        return redirect()->route('cart.index')->with('error', 'Product not found in cart');
+    }
+
 
     public function removeFromCart(Request $request, $productId)
     {

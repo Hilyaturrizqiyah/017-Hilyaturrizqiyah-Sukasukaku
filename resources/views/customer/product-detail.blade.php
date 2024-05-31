@@ -14,7 +14,7 @@
                 <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                     <!-- Image -->
                     <div class="flex justify-center items-center lg:block lg:h-auto">
-                        <img src="{{ $product->image ? asset($product->image) : asset('img/default-ingredients.jpg') }}" alt="{{ $product->name }}" class="h-full w-full object-cover object-center rounded-lg max-h-96">
+                        <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('img/default-ingredients.jpg') }}" alt="{{ $product->name }}" class="h-full w-full object-cover object-center rounded-lg max-h-96">
                     </div>
 
                     <!-- Product info -->
@@ -31,8 +31,7 @@
                             <!-- Description -->
                             <div class="mt-6">
                                 <p class="text-base text-gray-900">
-                                    {{-- {{ $product->description }} --}}
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, omnis laboriosam nemo et, voluptate dolorum sapiente, pariatur inventore quod vitae numquam ducimus libero beatae? A consequatur nemo accusantium ullam officiis?
+                                    {{ $product->description }}
                                 </p>
                             </div>
 
@@ -53,9 +52,9 @@
                                     <ul role="list" class="list-disc space-y-2 pl-4 text-sm">
                                         @foreach ($product->ingredients as $ingredient)
                                             <li class="flex items-center space-x-4">
-                                                <img src="{{ $ingredient->image ? asset($ingredient->image) : asset('img/default-ingredient.jpg') }}" alt="{{ $ingredient->ingredient_name }}" class="w-12 h-12 object-cover rounded-full">
+                                                <img src="{{ $ingredient->image ? asset('storage/' . $ingredient->image) : asset('img/default-ingredient.jpg') }}" alt="{{ $ingredient->ingredient_name }}" class="w-12 h-12 object-cover rounded-full">
                                                 <div>
-                                                    <p class="text-gray-600">{{ $ingredient->ingredient_name }} - {{ $ingredient->pivot->quantity }} {{ $ingredient->unit }}</p>
+                                                    <p class="text-gray-600">{{ $ingredient->ingredient_name }} - {{ $product->qty_product }} {{ $ingredient->unit }}</p>
                                                 </div>
                                             </li>
                                         @endforeach
@@ -63,11 +62,16 @@
                                 </div>
                             </div>
 
-                            <!-- Details -->
+                            <!-- Instruction -->
                             <div class="mt-10">
-                                <h2 class="text-sm font-medium text-gray-900">Details</h2>
-                                <div class="mt-4 space-y-6">
-                                    <p class="text-sm text-gray-600">{{ $product->details }}</p>
+                                <h3 class="text-sm font-medium text-gray-900 cursor-pointer border-b pb-4 flex items-center justify-between" onclick="toggleDropdown('instruction')">
+                                    Instruction
+                                    <i id="instruction-icon" class="fas fa-plus"></i>
+                                </h3>
+                                <div id="instruction" class="mt-4 hidden">
+                                    <div>
+                                        <p class="text-gray-600">{{ $product->instruction }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

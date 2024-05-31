@@ -28,14 +28,12 @@ class IngredientController extends Controller
     {
         $request->validate([
             'ingredient_name' => 'required|string|max:255',
-            'ingredient_price' => 'required|integer',
             'unit' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $ingredient = new Ingredient();
         $ingredient->ingredient_name = $request->input('ingredient_name');
-        $ingredient->ingredient_price = $request->input('ingredient_price');
         $ingredient->unit = $request->input('unit');
 
         if ($request->hasFile('image')) {
@@ -57,13 +55,11 @@ class IngredientController extends Controller
     {
         $request->validate([
             'ingredient_name' => 'required|string|max:255',
-            'ingredient_price' => 'required|integer',
             'unit' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $ingredient->ingredient_name = $request->input('ingredient_name');
-        $ingredient->ingredient_price = $request->input('ingredient_price');
         $ingredient->unit = $request->input('unit');
 
         if ($request->hasFile('image')) {
